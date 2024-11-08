@@ -5,7 +5,8 @@ public class bankingApp {
     private static Banking[] accounts = {
             new Banking(412435, 7452, "Chris Sandoval", 32000),
             new Banking(264863, 1349, "Marc Yim", 1000),
-            //new Banking("", "", "", "")
+            new Banking(123456, 1234, "JP Rafallo", 2300),
+            new Banking(234567, 2234, "NRG Ins", 3350)
     };
 
     private static Scanner scanner = new Scanner(System.in);
@@ -19,7 +20,6 @@ public class bankingApp {
         }
     }
 
-    // Method for login functionality
     public static Banking login() {
         System.out.print("Enter your User ID: ");
         int userId = scanner.nextInt();
@@ -28,18 +28,17 @@ public class bankingApp {
 
         for (Banking account : accounts) {
             if (account.getUserId() == userId && account.getPin() == pin) {
-                System.out.println("Welcome, " + account.getName() + "!");
+                System.out.println("Hello, " + account.getName() + ".");
                 return account;
             }
         }
-        return null; // Return null if login fails
+        return null;
     }
 
-    // Main menu after successful login
     public static void mainMenu(Banking currentUser) {
         int choice;
         while (true) {
-            System.out.println("\n--- Main Menu ---");
+            System.out.println("\n---- Main Menu ----");
             System.out.println("1. Check Balance");
             System.out.println("2. Cash-in");
             System.out.println("3. Money Transfer");
@@ -66,14 +65,12 @@ public class bankingApp {
         }
     }
 
-    // Menu for cash-in (deposit money)
     public static void cashInMenu(Banking currentUser) {
         System.out.print("Enter amount to deposit: ");
         double amount = scanner.nextDouble();
         currentUser.cashIn(amount);
     }
 
-    // Menu for money transfer
     public static void moneyTransferMenu(Banking currentUser) {
         System.out.print("Enter recipient User ID: ");
         int recipientId = scanner.nextInt();
@@ -88,13 +85,12 @@ public class bankingApp {
         currentUser.transferMoney(recipient, amount);
     }
 
-    // Method to find an account by user ID
     public static Banking findAccountByUserId(int userId) {
         for (Banking account : accounts) {
             if (account.getUserId() == userId) {
                 return account;
             }
         }
-        return null; // Return null if account not found
+        return null; 
     }
 }
